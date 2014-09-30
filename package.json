@@ -1,0 +1,26 @@
+{
+  "author": "David Oliveira <d.oliveira@prozone.org>",
+  "name": "jstemplate",
+  "description": "A pure Javascript templating engine for node.js",
+  "version": "0.2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/davidfoliveira/node-jstemplate"
+  },
+  "main": "./jst.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "optionalDependencies": {},
+  "license": "Copyleft",
+  "engines": {
+    "node": ">=0.10.5"
+  },
+  "keywords": [
+    "javascript",
+    "template",
+    "engine",
+    "templating",
+    "jstemplate",
+    "jst"
+  ]
+}
