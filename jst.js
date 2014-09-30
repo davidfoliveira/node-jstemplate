@@ -61,8 +61,6 @@ function processFile(file,args,handler) {
 				_o:				"",
 				_indent:		0,
 
-				headers:		{ },
-
 				next: function() {
 					var
 						nextCode;
@@ -106,7 +104,7 @@ function processFile(file,args,handler) {
 			};
 
 		// If we can use layout file
-		if ( self.opts.jstUseLayout != false ) {
+		if ( self.opts.useLayout != false ) {
 
 			// Check for a /layout.jst
 			return loadTemplate(self,"/layout.jst",function(err,layoutJSCode,xcode){
@@ -151,7 +149,7 @@ function loadTemplate(self,file,handler) {
 		f		= file.replace(/\/+/g,"/");
 
 	// Stat file to see if something changed. If no... use cache!
-	return statFile(self.opts.viewDir+"/"+f,self.opts.jstStatInterval,function(err,stat){
+	return statFile(self.opts.viewDir+"/"+f,self.opts.statInterval,function(err,stat){
 		if ( err ) {
 //			console.log("Error stating file '"+self.opts.viewDir+"/"+f+"': ",err);
 			return handler(err,null);
@@ -385,10 +383,10 @@ module.exports = function(opts){
 	}
 
 	// Defaults
-	if ( !this.opts.jstStatInterval )
-		this.opts.jstStatInterval = 5000;
-	if ( this.opts.jstUseLayout == null )
-		this.opts.jstUseLayout = true;
+	if ( !this.opts.statInterval )
+		this.opts.statInterval = 5000;
+	if ( this.opts.useLayout == null )
+		this.opts.useLayout = true;
 
 	// Check
 	if ( !this.opts.viewDir )

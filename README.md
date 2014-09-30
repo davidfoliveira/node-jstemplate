@@ -17,14 +17,24 @@
 ## Processing a template
 
 	var
-	    JST = require('jstemplate'),
-		jst = new JST({viewDir: 'views'});
+	    JSTemplate = require('jstemplate'),
+		jst = new JSTemplate({viewDir: 'views'});
 	
 	jst.process("basic.jst",{sir:process.env.LOGNAME},function(err,output){
 	    if ( err )
 	        throw err;
 	    console.log(output);
 	});
+
+## Settings
+
+The JSTemplate object supports the following settings:
+
+- `viewDir` : The directory containing the templates (or views)
+
+- `statInterval` : The interval of time (in ms) that a template file is stat()'ed and the modify time is watched to see if the template file was changed. Default to `5000`
+
+- `useLayout` : Defines if the layout.jst will be used to encapsulate the result of the processed template. Defaults to: `true`
 
 ## The syntax
 
@@ -48,6 +58,7 @@ These variable are accessible by the template code:
 
 - `jst` : The global JSTemplate object
 
+
 ## API
 
 The JSTemplate object exposes the following API:
@@ -63,6 +74,8 @@ The JSTemplate object exposes the following API:
 - `html(str)` : Converts some data on something that is safe to use on a HTML page
 
 - `url(str)` : Converts some data on something linkable (escape)
+
+- `global` variable : A place where you can store some global data
 
 
 ## Questions and suggestions
