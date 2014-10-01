@@ -80,7 +80,7 @@ function processFile(file,args,handler) {
 				},
 				print: function(value) {
 					var jst = this;
-					if ( typeof value == "undefined" )
+					if ( typeof value == "undefined" || value == null )
 						return;
 					if ( this._indent ) {
 						this._o += value.toString().replace(/\n/g,function(a,b){
@@ -137,7 +137,7 @@ function jstRun(jst,args,handler) {
 		handler(null,result);
 	}
 	catch(ex) {
-		handler(ex,'JST template '+jst.templateFile+' running error: '+ex.toString()+"\n");
+		handler(ex,'JST template '+jst.templateFile+' running error: '+ex.toString()+"\n\n"+_pre(ex.stack));
 	}
 
 }
@@ -351,13 +351,13 @@ function statFile(f,interval,handler) {
 }
 
 function _html(value) {
-	return (typeof(value) == "undefined") ? "(undefined)" : value.toString().toString().replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+	return (typeof(value) == "undefined") ? "(undefined)" : (value == null) ? "(null)" : value.toString().toString().replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
 }
 function _url(value) {
-	return (typeof(value) == "undefined") ? "(undefined)" :  escape(value.toString());
+	return (typeof(value) == "undefined") ? "(undefined)" : (value == null) ? "(null)" : escape(value.toString());
 }
 function _pre(code) {
-	return (typeof(code) == "undefined")  ? "(undefined)" : "<code style='display:block'>"+code.toString().replace(/</g,"&lt;").replace(/&/g,"&amp;").replace(/\n/g,"<br/>")+"</code>";
+	return (typeof(code) == "undefined")  ? "(undefined)" : (code == null) ? "(null)" : "<code style='display:block'>"+code.toString().replace(/</g,"&lt;").replace(/&/g,"&amp;").replace(/\n/g,"<br/>")+"</code>";
 }
 function _grep(list, field, expr){
 	var
