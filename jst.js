@@ -324,6 +324,7 @@ function _templateInclude(jst,file,args) {
 }
 
 function encodeText(str) {
+	str = str.replace(/\r/g,'\\r');
 	str = str.replace(/\n/g,'\\n');
 	str = str.replace(/'/g,'\\\'');
 	return str;
