@@ -176,10 +176,6 @@ function loadTemplate(self,file,handler) {
 			var
 				jsCode = codeCache[f];
 
-			// Changed ? go on!
-			if ( jsCode != null )
-				return handler(null,jsCode);
-
 			// Convert template in JS code
 			return convertTemplate(self,f,data.toString('utf-8'),true,function(err,code){
 				if ( err )
