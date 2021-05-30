@@ -158,8 +158,11 @@ function loadTemplate(self,file,handler) {
 			return handler(new Error("Template file '"+self.viewDir+"/"+f+"' is not a file but a directory"),null);
 
 		// Check if file modify time is the same, if yes, return cache!
-		if ( fileMTimes[f] != null && stat.mtime.getTime() == fileMTimes[f] && codeCache[f] != null )
-			return handler(null,codeCache[f]);
+		if ( fileMTimes[f] != null && stat.mtime.getTime() == fileMTimes[f] && codeCache[f] != null ) {
+			return setImmediate(function(){
+				handler(null,codeCache[f]);
+			});
+		}
 
 		// Save modify time
 		fileMTimes[f] = stat.mtime.getTime();
